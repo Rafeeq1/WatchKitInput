@@ -9,9 +9,26 @@
 import WatchKit
 import Foundation
 
-
 class InterfaceController: WKInterfaceController {
 
+    @IBOutlet var userInputLabel: WKInterfaceLabel!
+   
+    @IBAction func userInput() {
+        
+        let phrases=["Busy","At work"," At the movies","In meeting"]
+        
+        presentTextInputControllerWithSuggestions(phrases, allowedInputMode:.AllowEmoji) { (result) -> Void in
+            
+            if let choice = result {
+                
+                if choice[0] is String{
+                    self.userInputLabel.setText(choice[0] as? String)
+                }
+                
+            }
+        }
+        
+    }
     override func awakeWithContext(context: AnyObject?) {
         super.awakeWithContext(context)
         
